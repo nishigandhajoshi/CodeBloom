@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeBloom | Coding Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="logo" href="#dashboard">
+        <span class="logo-icon">🌱</span>
+        <span><strong>CodeBloom</strong><small>Small steps. Consistent code.</small></span>
+      </a>
+
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="#dashboard" class="nav-link active">⌂ Dashboard</a>
+        <a href="#add-problem" class="nav-link" id="nav-add-problem">＋ Add Problem</a>
+        <a href="#my-log" class="nav-link">▤ My Log</a>
+        <a href="#progress" class="nav-link">▥ DSA Progress</a>
+        <a href="#calendar" class="nav-link">▦ Calendar</a>
+      </nav>
+
+      <div class="sidebar-footer"><span>🌷</span><p>Better than yesterday ♡</p></div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <span>My coding space</span><span class="avatar">C</span>
+      </header>
+
+      <section class="welcome">
+        <p class="eyebrow">YOUR PERSONAL CODING TRACKER</p>
+        <h1>Let's grow, one problem at a time! ✨</h1>
+        <p>Every problem you solve is progress worth celebrating.</p>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card lavender"><span class="stat-icon">⌨️</span><p>Total Problems Solved</p><h2 id="total-solved">0</h2></article>
+        <article class="stat-card green"><span class="stat-icon">🔥</span><p>Day Streak</p><h2 id="streak">0</h2></article>
+        <article class="stat-card blue"><span class="stat-icon">🎯</span><p>Daily Goal</p><h2 id="daily-goal">0 / 2</h2></article>
+        <article class="stat-card peach"><span class="stat-icon">📅</span><p>Practice Days</p><h2 id="practice-days">0</h2></article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel" id="calendar">
+          <div class="panel-heading">
+            <div><h3>Coding Activity 🌸</h3><p class="muted">Your practice over the last 12 weeks</p></div>
+          </div>
+          <div class="calendar-wrap">
+            <div id="activity-calendar" class="activity-grid" aria-label="Coding activity calendar"></div>
+          </div>
+          <div class="calendar-legend">
+            <span>Less</span><i class="level-0"></i><i class="level-1"></i><i class="level-2"></i><i class="level-3"></i><i class="level-4"></i><span>More</span>
+          </div>
+          
+          <div class="selected-day-panel" id="selected-day-panel" aria-live="polite">
+            <h4 id="selected-day-title">Problems for today</h4>
+            <div id="selected-day-problems">
+              <p class="muted">Select a date to view your coding activity.</p>
+            </div>
+          </div>
+
+        </article>
+
+        <article class="panel" id="progress">
+          <div class="panel-heading"><div><h3>DSA Progress</h3><p class="muted">Keep showing up 💜</p></div></div>
+          <div id="topic-progress-list">
+            <div class="topic" data-topic="Arrays"><div class="topic-top"><span>Arrays</span><span class="topic-percentage">0%</span></div><div class="progress-track"><div class="progress-fill"></div></div></div>
+            <div class="topic" data-topic="Strings"><div class="topic-top"><span>Strings</span><span class="topic-percentage">0%</span></div><div class="progress-track"><div class="progress-fill"></div></div></div>
+            <div class="topic" data-topic="Linked Lists"><div class="topic-top"><span>Linked Lists</span><span class="topic-percentage">0%</span></div><div class="progress-track"><div class="progress-fill"></div></div></div>
+            <div class="topic" data-topic="Stacks &amp; Queues"><div class="topic-top"><span>Stacks &amp; Queues</span><span class="topic-percentage">0%</span></div><div class="progress-track"><div class="progress-fill"></div></div></div>
+            <div class="topic" data-topic="Trees"><div class="topic-top"><span>Trees</span><span class="topic-percentage">0%</span></div><div class="progress-track"><div class="progress-fill"></div></div></div>
+            <div class="topic" data-topic="Graphs"><div class="topic-top"><span>Graphs</span><span class="topic-percentage">0%</span></div><div class="progress-track"><div class="progress-fill"></div></div></div>
+            <div class="topic" data-topic="Dynamic Programming"><div class="topic-top"><span>Dynamic Programming</span><span class="topic-percentage">0%</span></div><div class="progress-track"><div class="progress-fill"></div></div></div>
+            <div class="topic" data-topic="Other"><div class="topic-top"><span>Other</span><span class="topic-percentage">0%</span></div><div class="progress-track"><div class="progress-fill"></div></div></div>
+          </div>
+        </article>
+      </section>
+
+      <article class="panel" id="weak-topics">
+        <div class="panel-heading"><div><h3>Topics to Practice 💜</h3><p class="muted">Gentle reminders for your next steps</p></div></div>
+        <div id="weak-topics-list"><p class="muted">Add and solve problems to discover which topics need practice.</p></div>
+      </article>
+
+      <article class="panel quick-actions" id="add-problem">
+        <h3>Ready for today's challenge? ✨</h3>
+        <p>Every problem you practice brings you one step forward.</p>
+        <div class="action-buttons">
+          <button class="primary-button" id="open-form" type="button">＋ Add a Problem</button>
+          <button class="secondary-button" id="view-log" type="button">View My Log</button>
+        </div>
+      </article>
+
+      <section class="panel form-panel" id="problem-form-section" hidden>
+        <div class="panel-heading">
+          <div><h3>🌷 Log a coding problem</h3><p class="muted">Every entry is a little win.</p></div>
+          <button class="close-button" id="close-form" type="button">Cancel</button>
+        </div>
+
+        <form id="problem-form">
+          <div class="form-group">
+            <label for="problem-name">Problem name *</label>
+            <input type="text" id="problem-name" placeholder="e.g. Two Sum" maxlength="100" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="platform">Platform *</label>
+              <select id="platform" required>
+                <option value="">Choose platform</option><option>LeetCode</option><option>GeeksforGeeks</option><option>CodeChef</option><option>HackerRank</option><option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="topic">Topic *</label>
+              <select id="topic" required>
+                <option value="">Choose topic</option><option>Arrays</option><option>Strings</option><option>Linked Lists</option><option>Stacks &amp; Queues</option><option>Trees</option><option>Graphs</option><option>Dynamic Programming</option><option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="difficulty">Difficulty *</label>
+              <select id="difficulty" required>
+                <option value="">Choose difficulty</option><option>Easy</option><option>Medium</option><option>Hard</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="learning-status">Learning status *</label>
+              <select id="learning-status" required>
+                <option value="">Choose status</option><option value="independent">Solved independently</option><option value="hints">Solved with hints</option><option value="revision">Needs revision</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="problem-date">Practice date *</label>
+            <input type="date" id="problem-date" required>
+          </div>
+
+          <p class="form-error" id="form-error" role="alert"></p>
+          <div class="form-actions">
+            <button class="primary-button submit-button" type="submit">Save Problem ♡</button>
+            <button class="secondary-button" id="cancel-form" type="button">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel log-panel" id="my-log">
+        <div class="panel-heading">
+          <div><h3>My Coding Log 📚</h3><p class="muted">Every little step counts.</p></div>
+          <span id="problem-count" class="count-badge">0 entries</span>
+        </div>
+        
+        <div class="log-controls">
+          <div class="form-group">
+            <label for="search-problems">🔎 Search problems</label>
+            <input
+              type="search"
+              id="search-problems"
+              placeholder="Search by problem name..."
+            >
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="filter-topic">Filter by topic</label>
+              <select id="filter-topic">
+                <option value="all">All topics</option>
+                <option value="Arrays">Arrays</option>
+                <option value="Strings">Strings</option>
+                <option value="Linked Lists">Linked Lists</option>
+                <option value="Stacks & Queues">Stacks & Queues</option>
+                <option value="Trees">Trees</option>
+                <option value="Graphs">Graphs</option>
+                <option value="Dynamic Programming">Dynamic Programming</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="filter-difficulty">Filter by difficulty</label>
+              <select id="filter-difficulty">
+                <option value="all">All difficulties</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="filter-platform">Filter by platform</label>
+              <select id="filter-platform">
+                <option value="all">All platforms</option>
+                <option value="LeetCode">LeetCode</option>
+                <option value="GeeksforGeeks">GeeksforGeeks</option>
+                <option value="CodeChef">CodeChef</option>
+                <option value="HackerRank">HackerRank</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="filter-status">Filter by status</label>
+              <select id="filter-status">
+                <option value="all">All statuses</option>
+                <option value="independent">Solved independently</option>
+                <option value="hints">Solved with hints</option>
+                <option value="revision">Needs revision</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sort-problems">Sort problems</label>
+            <select id="sort-problems">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="difficulty-asc">Difficulty: Easy to Hard</option>
+              <option value="difficulty-desc">Difficulty: Hard to Easy</option>
+              <option value="name-asc">Name: A to Z</option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            id="reset-filters"
+            class="secondary-button"
+          >
+            ↺ Reset filters
+          </button>
+
+          <p id="filter-results" class="muted" aria-live="polite"></p>
+        </div>
+
+        <div id="problem-list" class="problem-list"><p class="empty-state">No problems logged yet. Add your first problem! 🌱</p></div>
+      </section>
+
+      <footer class="page-footer">Made with 💜 and a little bit of persistence.</footer>
+    </main>
+  </div>
+</body>
+</html>
